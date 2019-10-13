@@ -49,6 +49,22 @@ def squared_distance(v: Vector, w: Vector) -> float:
 def distance(v: Vector, w: Vector) -> float:
     return math.sqrt(squared_distance(v, w))
 
+def vector_sum(vectors: List[Vector]) -> Vector:
+    assert vectors, "no vectors provided"
+    num_elements = len(vectors[0])
+    assert all(len(v) == num_elements for v in vectors), "different sizes"
+    return [sum(vector[i] for vector in vectors) for i in range(num_elements)]
+
+assert vector_sum([[1, 2], [3, 4], [5, 6], [7, 8]]) == [16, 20]
+
+
+def vector_mean(vectors: List[Vector]) -> Vector:
+    n = len(vectors)
+    return scalar_multiply(1/n, vector_sum(vectors))
+
+assert vector_mean([[1, 2], [3, 4], [5, 6]]) == [3, 4]
+
+
 def difference_quotient(f: Callable[[float], float],
                         x: float,
                         h: float) -> float:
@@ -95,4 +111,14 @@ for epoch in range(1000):
     v = gradient_step(v, grad, -0.01)
     print(epoch, v)
 
-assert distance(v, [0, 0, 0]) < 0.001 
+assert distance(v, [0, 0, 0]) < 0.001
+
+inputs = [(x, 20 * x + 5) for x in range(-50, 50)]
+
+def linear_gradient(x: float, y: float, theta: Vector) -> Vector:
+    slope, intercept = theta
+    predicted = slope * x + intercept
+    error = (predicted - y)
+    squared_error = error ** 2
+    grad = [2 * error * x, 2 * error]
+    return grad
