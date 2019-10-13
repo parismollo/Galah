@@ -31,4 +31,4 @@ plt.title("Actual Derivatives vs. Estimates")
 plt.plot(xs, actuals, 'rx', label='Actual')       # red  x
 plt.plot(xs, estimates, 'b+', label='Estimate')   # blue +
 plt.legend(loc=9)
-plt.show()
+# plt.show()
