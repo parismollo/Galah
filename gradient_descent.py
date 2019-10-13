@@ -32,3 +32,7 @@ plt.plot(xs, actuals, 'rx', label='Actual')       # red  x
 plt.plot(xs, estimates, 'b+', label='Estimate')   # blue +
 plt.legend(loc=9)
 # plt.show()
+
+def partial_difference_quotient(f: Callable[[Vector], float], v: Vector, i: int, h: float)-> float:
+    w = [v_j + (h if j == i else 0) for j, v_j in enumerate(v)]
+    return (f(w) - f(v) / h)
