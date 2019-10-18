@@ -34,14 +34,14 @@ def gradient_step(v: Vector, gradient: Vector, step_size: float) -> Vector:
     step = scalar_multiply(step_size, gradient)
     return add(v, step)
 
-inputs = [(x, 20 * x + 5) for x in range(-50, 50)]
+inputs = [(x, 10 * x + 7) for x in range(-50, 50)]
 
 def linear_gradient(x: float, y: float, theta: Vector) -> Vector:
     slope, intercept = theta
-    predicted = slope * x + intercept    # The prediction of the model.
-    error = (predicted - y)              # error is (predicted - actual)
-    squared_error = error ** 2           # We'll minimize squared error
-    grad = [2 * error * x, 2 * error]    # using its gradient.
+    predicted = slope * x + intercept
+    error = (predicted - y)
+    squared_error = error ** 2
+    grad = [2 * error * x, 2 * error]
     return grad
 
 theta = [random.uniform(-1, 1), random.uniform(-1, 1)]
@@ -55,5 +55,5 @@ for epoch in range(5000):
     print(epoch, theta)
 
 slope, intercept = theta
-assert 19.9 < slope < 20.1, "slope should be about 20"
-assert 4.9 < intercept < 5.1, "intercept should be about 5"
+assert 9.99 < slope < 10.11, "slope should be about 10"
+assert 6.9 < intercept < 7.1,"intercept should be about 7"
