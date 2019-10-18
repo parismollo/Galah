@@ -1,3 +1,3 @@
 # Gradient Descent
 
-Practicing some calculus concepts, code is totally inspired from Joel Grus book "Data Science from scratch"
+The purpose of this repository is to practice the use of the gradient descent technique. Exercise from the Book "Data Science from Scratch".
