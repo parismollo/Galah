@@ -1,12 +1,7 @@
 # Starting by the idea of the Gradient Descent
-import matplotlib.pyplot as plt
-from typing import List, Callable
+from typing import List
 import random
-import math
-
-
 Vector = List[float]
-
 
 def add(v: Vector, w: Vector) -> Vector:
     assert len(v) == len(w), "Vector must be the same length"
@@ -14,40 +9,11 @@ def add(v: Vector, w: Vector) -> Vector:
 
 assert add([1, 2, 3], [1, 2, 3]) == [2, 4, 6]
 
-def dot(v: Vector, w: Vector) -> float:
-    assert len(v) == len(w), "Vectors must be the same length"
-    return sum(v_i * w_i for v_i, w_i in zip(v,w))
-
-assert dot([1, 2, 3], [2, 2, 2]) == 12, "Something went wrong"
-
-
-def sum_of_squares(v: Vector) -> float:
-    return dot(v, v)
-
 
 def scalar_multiply(c: float, v: Vector) -> Vector:
     return [c * v_i for v_i in v]
 
 assert scalar_multiply(2, [1, 2, 3]) == [2, 4, 6]
-
-
-def subtract(v: Vector, w: Vector) -> Vector:
-    assert len(v) == len(w), "Both should have the same length"
-    return [v_i - w_i for v_i, w_i in zip(v, w)]
-
-assert subtract([5, 7, 9], [4, 5, 6]) == [1, 2, 3]
-
-
-def magnitude(v: Vector) -> float:
-    return math.sqrt(sum_of_squares(v))
-
-assert magnitude([3, 4]) == 5
-
-def squared_distance(v: Vector, w: Vector) -> float:
-    return sum_of_squares(subtract(v, w))
-
-def distance(v: Vector, w: Vector) -> float:
-    return math.sqrt(squared_distance(v, w))
 
 def vector_sum(vectors: List[Vector]) -> Vector:
     assert vectors, "no vectors provided"
@@ -57,68 +23,37 @@ def vector_sum(vectors: List[Vector]) -> Vector:
 
 assert vector_sum([[1, 2], [3, 4], [5, 6], [7, 8]]) == [16, 20]
 
-
 def vector_mean(vectors: List[Vector]) -> Vector:
     n = len(vectors)
     return scalar_multiply(1/n, vector_sum(vectors))
 
 assert vector_mean([[1, 2], [3, 4], [5, 6]]) == [3, 4]
 
-
-def difference_quotient(f: Callable[[float], float],
-                        x: float,
-                        h: float) -> float:
-    return (f(x + h) - f(x)) / h
-
-def square(x: float) -> float:
-    return x * x
-
-def derivative_sqrt_function(x: float) -> float:
-    return 2 * x
-
-
-xs = range(-10, 11)
-actuals = [derivative_sqrt_function(x) for x in xs]
-estimates = [difference_quotient(square, x, h=0.001) for x in xs]
-
-plt.title("Actual Derivatives vs. Estimates")
-plt.plot(xs, actuals, 'rx', label='Actual')       # red  x
-plt.plot(xs, estimates, 'b+', label='Estimate')   # blue +
-plt.legend(loc=9)
-# plt.show()
-
-def partial_difference_quotient(f: Callable[[Vector], float], v: Vector, i: int, h: float)-> float:
-    w = [v_j + (h if j == i else 0) for j, v_j in enumerate(v)]
-    return (f(w) - f(v) / h)
-
-def estimate_gradient(f: Callable[[Vector], float], v: Vector, h: float = 0.0001):
-    return [partial_difference_quotient(f, v, i, h) for i in range(len(v))]
-
-
 def gradient_step(v: Vector, gradient: Vector, step_size: float) -> Vector:
     assert len(v) == len(gradient)
     step = scalar_multiply(step_size, gradient)
     return add(v, step)
 
-
-def sum_of_squares_gradient(v: Vector) -> Vector:
-    return [2 * v_i for v_i in v]
-
-v = [random.uniform(-10, 10) for i in range(3)]
-
-for epoch in range(1000):
-    grad = sum_of_squares_gradient(v)
-    v = gradient_step(v, grad, -0.01)
-    print(epoch, v)
-
-assert distance(v, [0, 0, 0]) < 0.001
-
 inputs = [(x, 20 * x + 5) for x in range(-50, 50)]
 
 def linear_gradient(x: float, y: float, theta: Vector) -> Vector:
     slope, intercept = theta
-    predicted = slope * x + intercept
-    error = (predicted - y)
-    squared_error = error ** 2
-    grad = [2 * error * x, 2 * error]
+    predicted = slope * x + intercept    # The prediction of the model.
+    error = (predicted - y)              # error is (predicted - actual)
+    squared_error = error ** 2           # We'll minimize squared error
+    grad = [2 * error * x, 2 * error]    # using its gradient.
     return grad
+
+theta = [random.uniform(-1, 1), random.uniform(-1, 1)]
+
+learning_rate = 0.001
+
+for epoch in range(5000):
+    grad = vector_mean([linear_gradient(x, y, theta) for x, y in inputs])
+    theta = gradient_step(theta, grad, -learning_rate)
+
+    print(epoch, theta)
+
+slope, intercept = theta
+assert 19.9 < slope < 20.1, "slope should be about 20"
+assert 4.9 < intercept < 5.1, "intercept should be about 5"
