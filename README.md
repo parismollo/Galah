@@ -33,5 +33,5 @@ Mini-batches has the best of both worlds, will create random "batches" of the da
 
 
 ## Resources that I used to learn about this fun topic:
-Book: Data Science from Scratch, Joel Grus
-Video: StatQuest with Josh Starmer
+- Book: Data Science from Scratch, Joel Grus
+- Video: StatQuest with Josh Starmer
