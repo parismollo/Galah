@@ -1,5 +1,5 @@
 # Starting by the idea of the Gradient Descent
-from typing import List
+from typing import List, Iterator, TypeVar
 import random
 Vector = List[float]
 
@@ -55,5 +55,42 @@ for epoch in range(5000):
     print(epoch, theta)
 
 slope, intercept = theta
+assert 9.99 < slope < 10.11, "slope should be about 10"
+assert 6.9 < intercept < 7.1,"intercept should be about 7"
+
+
+T = TypeVar("T")
+
+def minibatches(dataset: List[T], batch_size: int, shuffle: bool = True) -> Iterator[List[T]]:
+    batch_starts = [start for start in range(0, len(dataset),batch_size)]
+    if shuffle: random.shuffle(batch_starts)
+
+    for start in batch_starts:
+        end = start + batch_size
+        yield dataset[start:end]
+
+theta = [random.uniform(-1, 1), random.uniform(-1, 1)]
+
+for epoch in range(1000):
+    for batch in minibatches(inputs, batch_size=20):
+        grad = vector_mean([linear_gradient(x, y, theta) for x, y in batch])
+        theta = gradient_step(theta, grad, -learning_rate)
+        print(epoch, theta)
+
+slope, intercept = theta
+
+assert 9.99 < slope < 10.11, "slope should be about 10"
+assert 6.9 < intercept < 7.1,"intercept should be about 7"
+
+
+theta = [random.uniform(-1, 1), random.uniform(-1, 1)]
+for epoch in range(100):
+    for x, y in inputs:
+        grad = linear_gradient(x, y, theta)
+        theta = gradient_step(theta, grad, -learning_rate)
+        print(epoch, theta)
+
+slope, intercept = theta
+
 assert 9.99 < slope < 10.11, "slope should be about 10"
 assert 6.9 < intercept < 7.1,"intercept should be about 7"
