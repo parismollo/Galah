@@ -28,4 +28,10 @@ Mini-batches has the best of both worlds, will create random "batches" of the da
 1. Clone the repository
 2. Make sure you are using python 3.6
 3. Run the main file
-4. To fit with the linear model choose one of the 3 options (1) Gradient Descent (2) Mini-batches (3) Stochastic 
+4. To fit with the linear model choose one of the 3 options (1) Gradient Descent (2) Mini-batches (3) Stochastic
+
+
+
+## Resources that I used to learn about this fun topic:
+Book: Data Science from Scratch, Joel Grus
+Video: StatQuest with Josh Starmer
