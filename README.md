@@ -3,7 +3,7 @@
 The purpose of this repository is to practice the use of the gradient descent technique. Exercise from the Book "Data Science from Scratch".
 
 
-## What  have I learned from Gradient Descents?
+## What  have I learned from Gradient Descent?
 
 Frequently when we will need to find a model that will do accurate forecasts of a specific data set, we will need to minimize its errors and the technique to do so is called Gradient Descent.
 
@@ -14,5 +14,9 @@ There are many ways of computing the error of a function, we will use the sum of
 The gradient with the parameters (theta) will give us the slope of the loss function, we will then compute the “step size” which is nothing more than the slope of the gradient times the learning rate. The step size will give us the value of the next value for (theta) by doing :
 new (theta) = old (theta) - step size. Then we will repeat this process until we find a slope that gets close to 0, therefore, a step size smaller than 0.001 and this should give us the value of (theta) that will fit our line (if linear gradient) the best in our data set with smallest SSR (sum of squared residuals)
 
-* Stochastic gradient descent (todo)
-* Mini-batches (todo)
+* Stochastic gradient descent
+
+If we have a big data set, compute the values of each data point for all the different values of (theta) can be extremely expensive to compute, Stochastic gradient Descent takes a single random value of the data set for each gradient computation.
+* Mini-batches
+
+Mini-batches has the best of both worlds, will create random "batches" of the data set for each computation in order to learn more from the data in comparison to the Stochastic technique, however it will take a limited size batch in order to avoid large expensive computation in comparison to the normal Gradient Descent
