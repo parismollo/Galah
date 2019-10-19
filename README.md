@@ -3,7 +3,7 @@
 The purpose of this repository is to practice the use of the gradient descent technique. Exercise from the Book "Data Science from Scratch".
 
 
-##What  have I learned from Gradient Descents?
+## What  have I learned from Gradient Descents?
 
 Frequently when we will need to find a model that will do accurate forecasts of a specific data set, we will need to minimize its errors and the technique to do so is called Gradient Descent.
 
