@@ -22,7 +22,9 @@ If we have a big data set, compute the values of each data point for all the dif
 Mini-batches has the best of both worlds, will create random "batches" of the data set for each computation in order to learn more from the data in comparison to the Stochastic technique, however it will take a limited size batch in order to avoid large expensive computation in comparison to the normal Gradient Descent
 
 # Todo
-* add mountain situation 
+- [ ] difference quotient
+- [ ] partial derivatives quotient
+- [ ] add mountain situation 
 ## Run the code
 
 1. Clone the repository
