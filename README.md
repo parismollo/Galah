@@ -1,6 +1,9 @@
 # Gradient Descent
 
-The purpose of this repository is to practice the use of the gradient descent technique. Exercise from the Book "Data Science from Scratch".
+The purpose of this repository is my self practice of the Gradient Descent technique. Exercise from the Book "Data Science from Scratch"
+
+I am a student that is learning, let me know if you find any errors,the code is inspired from examples and exercises found in books.
+
 
 
 ## What  have I learned from Gradient Descent?
