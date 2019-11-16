@@ -1,4 +1,5 @@
-# Gradient Descent
+<img src="img/logo.png" alt="logo" width="150" heigth="150"/>
+
 
 The purpose of this repository is my self practice of the Gradient Descent technique. Exercise from the Book "Data Science from Scratch"
 
@@ -27,7 +28,7 @@ Mini-batches has the best of both worlds, will create random "batches" of the da
 # Todo
 - [ ] Difference quotient
 - [ ] Partial derivatives quotient
-- [ ] add mountain situation 
+- [ ] add mountain situation
 ## Run the code
 
 1. Clone the repository
